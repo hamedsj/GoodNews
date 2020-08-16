@@ -1,7 +1,6 @@
 package me.pitok.networking.di.components
 
 import dagger.Component
-import me.pitok.coroutines.Dispatcher
 import me.pitok.dependencyinjection.library.LibraryScope
 import me.pitok.networking.AuthorizationInterceptor
 import me.pitok.networking.OkHttpAuthenticator
