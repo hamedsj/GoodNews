@@ -21,6 +21,7 @@ ext {
             gson : "2.8.6",
             convertergson : "2.5.0",
             coroutines : '1.3.5',
-            navigation : '2.3.0'
+            navigation : '2.3.0',
+            googleservices: '4.3.3'
     ]
 }
