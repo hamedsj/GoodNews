@@ -1,0 +1,3 @@
+package me.pitok.networking.response
+
+interface ResponseDataInterface
