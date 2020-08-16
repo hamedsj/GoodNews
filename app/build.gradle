@@ -18,7 +18,19 @@ android {
 
     buildTypes {
         release {
+            if (file("google-services.json").exists()) {
+                applyFirebasePlugins()
+            }
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            if (file("google-services.json").exists()) {
+                applyFirebasePlugins()
+            }
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -34,4 +46,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+}
+
+def applyFirebasePlugins() {
+    apply plugin: 'com.google.gms.google-services'
 }
