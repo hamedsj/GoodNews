@@ -1,3 +1,4 @@
+include ':libraries:lifecycle'
 include ':shared:firebase'
 include ':libraries:navigation'
 include ':libraries:androidcore'
