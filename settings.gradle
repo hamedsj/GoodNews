@@ -1,3 +1,4 @@
+include ':shared:plugins'
 include ':libraries:dealer'
 include ':libraries:lifecycle'
 include ':shared:firebase'
