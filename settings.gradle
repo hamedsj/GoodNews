@@ -1,3 +1,4 @@
+include ':shared:neew'
 include ':shared:plugins'
 include ':libraries:dealer'
 include ':libraries:lifecycle'
