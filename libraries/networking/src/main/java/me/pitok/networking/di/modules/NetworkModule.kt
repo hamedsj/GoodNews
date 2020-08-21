@@ -121,4 +121,10 @@ class NetworkModule {
             .addConverterFactory(gsonConverterFactory)
             .build()
     }
+
+    @Provides
+    @LibraryScope
+    fun provideNetworkApiInterface(retrofit: Retrofit): ApiInterface{
+        return retrofit.create(ApiInterface::class.java)
+    }
 }
