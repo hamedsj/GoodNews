@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/solid_bg_primary_dark"
+    android:layout_marginTop="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginStart="12dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextIcon"
+        android:id="@+id/itemNeewsListContent"
+        android:gravity="start"
+        tools:text="@string/lorem"
+        tools:maxLines="5"
+        android:padding="16dp"
+        android:maxLength="1000"
+        android:fontFamily="@font/vazir_medium"
+        android:layout_alignParentTop="true"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/itemNeewsListDivider"
+        android:background="@color/colorDivider"
+        android:layout_below="@+id/itemNeewsListContent"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/itemNeewsListReportIc"
+        android:layout_below="@+id/itemNeewsListDivider"
+        android:layout_alignParentStart="true"
+        android:padding="10dp"
+        android:src="@drawable/ic_sadface"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemNeewsListDate"
+        android:fontFamily="@font/vazir"
+        android:layout_alignTop="@+id/itemNeewsListReportIc"
+        android:layout_alignBottom="@+id/itemNeewsListReportIc"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:gravity="center"
+        android:textColor="@color/colorTextIcon"
+        tools:text="۲ هفته پیش"
+        />
+
+</RelativeLayout>
