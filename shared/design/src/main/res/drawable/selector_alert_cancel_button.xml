@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <stroke
+                android:color="@color/colorSecondaryText"
+                android:width="2dp" />
+            <corners android:radius="48dp" />
+        </shape>
+    </item>
+
+    <item android:state_enabled="true">
+        <selector>
+            <item android:state_pressed="true">
+                <layer-list>
+                    <item android:drawable="@drawable/shape_stroke_primary_button_pill" />
+                    <item>
+                        <shape android:shape="rectangle">
+                            <stroke
+                                android:width="2dp"
+                                android:color="@color/colorDividerRevert" />
+                            <corners android:radius="48dp" />
+                        </shape>
+                    </item>
+                </layer-list>
+            </item>
+
+            <item android:drawable="@drawable/shape_stroke_primary_button_pill" />
+        </selector>
+    </item>
+
+</selector>
