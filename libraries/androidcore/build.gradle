@@ -7,4 +7,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$library.kotlin"
     implementation "com.google.dagger:dagger:$library.dagger"
     kapt "com.google.dagger:dagger-compiler:$library.dagger"
+
+    implementation project(":libraries:dependencyinjection")
 }

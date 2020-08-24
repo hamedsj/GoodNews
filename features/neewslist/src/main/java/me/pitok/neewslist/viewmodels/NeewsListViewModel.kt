@@ -13,7 +13,7 @@ import me.pitok.networking.ifSuccessful
 import me.pitok.networking.otherwise
 import javax.inject.Inject
 
-class NeewListViewModel @Inject constructor(
+class NeewsListViewModel @Inject constructor(
     private val neewsRepository: NeewsRepository,
     private val dispatcher: Dispatcher
 ): ViewModel() {

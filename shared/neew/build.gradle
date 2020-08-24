@@ -7,7 +7,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$library.kotlin"
     implementation "com.google.dagger:dagger:$library.dagger"
-    annotationProcessor "com.google.dagger:dagger-compiler:$library.dagger"
+    kapt "com.google.dagger:dagger-compiler:$library.dagger"
     implementation "com.squareup.retrofit2:retrofit:$library.retrofit"
     implementation "com.google.code.gson:gson:$library.gson"
     implementation "com.squareup.retrofit2:converter-gson:$library.convertergson"
@@ -16,5 +16,7 @@ dependencies {
     implementation project(":libraries:dependencyinjection")
     implementation project(":libraries:datasource")
     implementation project(":libraries:networking")
+    implementation project(":libraries:sharedpreferences")
+    implementation project(":libraries:androidcore")
 
 }

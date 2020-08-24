@@ -7,7 +7,12 @@
     <color name="colorTextIcon">#FFFFFF</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryText">#757575</color>
-    <color name="colorDivider">#BDBDBD</color>
+    <color name="colorDivider">#1F000000</color>
+    <color name="colorDividerRevert">#1FFFFFFF</color>
+    <color name="colorRipple">#39000000</color>
+    <color name="colorRippleRevert">#39FFFFFF</color>
+    <color name="colorDrawRipple">#8F000000</color>
+    <color name="colorDrawRippleRevert">#8FFFFFFF</color>
 
 
 </resources>

@@ -1,19 +1,18 @@
 package me.pitok.networking.di.modules
 
 import android.content.Context
-import android.content.SharedPreferences
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import me.pitok.androidcore.qulifiers.ApplicationContext
 import me.pitok.datasource.Readable
 import me.pitok.datasource.Writable
-import me.pitok.dependencyinjection.library.LibraryScope
 import me.pitok.networking.ApiInterface
 import me.pitok.networking.AuthorizationInterceptor
 import me.pitok.networking.OkHttpAuthenticator
 import me.pitok.networking.dataSource.TokenResponseToEntityMapper
 import me.pitok.networking.dataSource.TokenResponseToTokenEntity
+import me.pitok.networking.di.scopes.NetworkScope
 import me.pitok.networking.tokenController.TokenReader
 import me.pitok.networking.tokenController.TokenRefresher
 import me.pitok.networking.tokenController.TokenWriter
@@ -33,7 +32,7 @@ class NetworkModule {
     }
 
     @Provides
-    @LibraryScope
+    @NetworkScope
     fun providePkHttpClientCache( @ApplicationContext
         context: Context
     ): Cache {
@@ -43,25 +42,25 @@ class NetworkModule {
     }
 
     @Provides
-    @LibraryScope
+    @NetworkScope
     fun provideTokenResponseToEntityMapper(): TokenResponseToEntityMapper{
         return TokenResponseToTokenEntity()
     }
 
     @Provides
-    @LibraryScope
+    @NetworkScope
     fun provideTokenWriter(@TokenSP spTokenWriter: Writable<StoreModel<String>>): TokenWriter{
         return TokenWriter(spTokenWriter)
     }
 
     @Provides
-    @LibraryScope
+    @NetworkScope
     fun provideTokenReader(@TokenSP spTokenReader: Readable.IO<String, String>): TokenReader{
         return TokenReader(spTokenReader)
     }
 
     @Provides
-    @LibraryScope
+    @NetworkScope
     fun provideTokenRefresher(apiInterface: ApiInterface,
                               @TokenSP spTokenReader: Readable.IO<String,String>,
                               mapper: TokenResponseToEntityMapper): TokenRefresher{
@@ -69,7 +68,7 @@ class NetworkModule {
     }
 
     @Provides
-    @LibraryScope
+    @NetworkScope
     fun provideOkHttpAuthenticator(
         tokenRefresher: TokenRefresher,
         tokenWriter: TokenWriter,
@@ -83,13 +82,13 @@ class NetworkModule {
     }
 
     @Provides
-    @LibraryScope
+    @NetworkScope
     fun provideAuthorizationInterceptor(tokenReader: TokenReader): AuthorizationInterceptor {
         return AuthorizationInterceptor(tokenReader)
     }
 
     @Provides
-    @LibraryScope
+    @NetworkScope
     fun provideOkHttpClient(
         cache: Cache?, okHttpAuthenticator: OkHttpAuthenticator?,
         authorizationInterceptor: AuthorizationInterceptor?
@@ -102,13 +101,13 @@ class NetworkModule {
     }
 
     @Provides
-    @LibraryScope
+    @NetworkScope
     fun provideGsonConverter(): GsonConverterFactory {
         return GsonConverterFactory.create()
     }
 
     @Provides
-    @LibraryScope
+    @NetworkScope
     fun getRetrofit(
         okHttpClient: Lazy<OkHttpClient>,
         gsonConverterFactory: GsonConverterFactory
@@ -123,7 +122,7 @@ class NetworkModule {
     }
 
     @Provides
-    @LibraryScope
+    @NetworkScope
     fun provideNetworkApiInterface(retrofit: Retrofit): ApiInterface{
         return retrofit.create(ApiInterface::class.java)
     }

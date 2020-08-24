@@ -28,6 +28,12 @@ subprojects {
                 kotlinOptions {
                     jvmTarget = "1.8"
                 }
+                if (project.getPlugins().hasPlugin('kotlin-kapt')) {
+                    kapt {
+                        generateStubs = true
+                        correctErrorTypes = true
+                    }
+                }
                 if (project.getPlugins().hasPlugin('kotlin-android-extensions')) {
                     androidExtensions {
                         experimental = true

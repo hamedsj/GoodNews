@@ -11,10 +11,11 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$library.fragment"
 
     implementation "com.google.dagger:dagger:$library.dagger"
-    annotationProcessor "com.google.dagger:dagger-compiler:$library.dagger"
+    kapt "com.google.dagger:dagger-compiler:$library.dagger"
     implementation "com.airbnb.android:epoxy:$library.epoxy"
     kapt "com.airbnb.android:epoxy-processor:$library.epoxy"
 
+    implementation project(":libraries:dependencyinjection")
     implementation project(":shared:design")
     implementation project(":shared:neew")
     implementation project(":libraries:mapper")
@@ -23,5 +24,7 @@ dependencies {
     implementation project(":libraries:navigation")
     implementation project(":libraries:coroutines")
     implementation project(":libraries:networking")
-
+    implementation project(":libraries:sharedpreferences")
+    implementation project(":libraries:androidcore")
+    implementation project(":libraries:datasource")
 }

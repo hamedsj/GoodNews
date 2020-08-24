@@ -14,27 +14,29 @@ import kotlinx.android.synthetic.main.fragment_neews_list.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import me.pitok.coroutines.Dispatcher
+import me.pitok.design.AlertBottomSheetDialog
 import me.pitok.lifecycle.ViewModelFactory
 import me.pitok.navigation.Navigate
 import me.pitok.navigation.observeNavigation
 import me.pitok.neew.entity.NeewEntity
 import me.pitok.neewslist.R
-import me.pitok.neewslist.viewmodels.NeewListViewModel
+import me.pitok.neewslist.di.builder.NeewsListComponentBuilder
+import me.pitok.neewslist.viewmodels.NeewsListViewModel
 import javax.inject.Inject
 
 class NeewListFragment : Fragment(R.layout.fragment_neews_list) {
 
     companion object{
-        val SHOW_ANIMATION_DELAY = 100L
+        const val SHOW_ANIMATION_DELAY = 100L
     }
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModelFactory: @JvmSuppressWildcards ViewModelFactory
 
     @Inject
     lateinit var dispatcher: Dispatcher
 
-    private val neewListViewModel: NeewListViewModel by viewModels { viewModelFactory }
+    private val neewsListViewModel: NeewsListViewModel by viewModels { viewModelFactory }
 
     private val neewListEpoxyController = NeewListController(::showSendReportDialog)
 
@@ -43,7 +45,7 @@ class NeewListFragment : Fragment(R.layout.fragment_neews_list) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        //call Inject Here
+        NeewsListComponentBuilder.getComponent().inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +54,7 @@ class NeewListFragment : Fragment(R.layout.fragment_neews_list) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = neewListEpoxyController.adapter
         }
-        neewListViewModel.apply {
+        neewsListViewModel.apply {
             updateNeewsListLiveData.observe(viewLifecycleOwner,::updateNeewList)
             showMessageLiveData.observe(viewLifecycleOwner,::showMessage)
         }
@@ -78,7 +80,20 @@ class NeewListFragment : Fragment(R.layout.fragment_neews_list) {
     }
 
     private fun showSendReportDialog(position: Int){
-
+        AlertBottomSheetDialog(
+            requireContext()
+        ).apply {
+            title = getString(R.string.send_report_dialog_title)
+            onOkClickListener = {
+                neewsListViewModel.sendReport(position)
+                dismiss()
+            }
+            onCancelClickListener = {
+                dismiss()
+            }
+        }.run {
+            show()
+        }
     }
 
 }

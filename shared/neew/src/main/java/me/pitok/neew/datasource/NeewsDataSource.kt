@@ -37,4 +37,4 @@ class NeewsDataSource @Inject constructor(
 typealias NeewWritable = Writable.Suspendable.IO<AddNeewRequest,
         @JvmSuppressWildcards Response<MessageResponse, UnAuthenticatedException>>
 
-typealias NeewsReadable = Readable.Suspendable<Response<NeewsResponse, UnAuthenticatedException>>
+typealias NeewsReadable = Readable.Suspendable<@JvmSuppressWildcards Response<NeewsResponse, UnAuthenticatedException>>

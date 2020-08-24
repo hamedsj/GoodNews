@@ -1,6 +1,7 @@
 package me.pitok.neew.di.components
 
 import dagger.Component
+import me.pitok.dependencyinjection.shared.SharedScope
 import me.pitok.mapper.Mapper
 import me.pitok.neew.api.NeewsApiInterface
 import me.pitok.neew.api.response.NeewApiEntity
@@ -15,6 +16,7 @@ import me.pitok.neew.entity.NeewEntity
 import me.pitok.neew.repository.NeewsRepository
 import me.pitok.networking.di.components.NetworkComponent
 
+@SharedScope
 @Component(modules = [
     NeewApiModule::class,
     NeewRepositoryModule::class,
@@ -34,5 +36,5 @@ interface NeewsComponent {
     fun exposeNeewsApiInterface(): NeewsApiInterface
 
     fun exposeNeewRepository(): Mapper<NeewApiEntity, NeewEntity>
-    
+
 }
