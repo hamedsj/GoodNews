@@ -1,3 +1,4 @@
+include ':features:addneew'
 include ':shared:design'
 include ':features:neewslist'
 include ':shared:neew'
