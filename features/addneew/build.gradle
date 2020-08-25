@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -10,6 +11,20 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$library.constraintlayout"
     implementation "androidx.fragment:fragment-ktx:$library.fragment"
 
+    implementation "com.google.dagger:dagger:$library.dagger"
+    kapt "com.google.dagger:dagger-compiler:$library.dagger"
+    implementation "com.google.android.material:material:$library.material"
+
+
+
+    implementation project(":libraries:dependencyinjection")
+    implementation project(":libraries:lifecycle")
+    implementation project(":libraries:navigation")
+    implementation project(":libraries:sdkextentions")
+    implementation project(":libraries:coroutines")
+    implementation project(":libraries:networking")
+    implementation project(":libraries:datasource")
     implementation project(":shared:design")
+    implementation project(":shared:neew")
 
 }
