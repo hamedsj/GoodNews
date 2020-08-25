@@ -20,7 +20,7 @@ class NeewsRepositoryImpl @Inject constructor(
     private val mapper: Mapper<NeewApiEntity,NeewEntity>
 ) : NeewsRepository{
 
-    override suspend fun getNeews(): Response<List<NeewEntity>, UnAuthenticatedException> {
+    override suspend fun getNeews(): Response<List<NeewEntity>, Throwable> {
         val getNewsResult = neewsReadable.read()
         return if (getNewsResult.isSuccessful()){
             Success(getNewsResult.getSuccessResponse().value.data.news
@@ -30,7 +30,7 @@ class NeewsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addNeew(addNeewRequest: AddNeewRequest): Response<Boolean, UnAuthenticatedException> {
+    override suspend fun addNeew(addNeewRequest: AddNeewRequest): Response<Boolean, Throwable> {
         val addNeewResult = neewWritable.write(addNeewRequest)
         return if (addNeewResult.isSuccessful()){
             Success(true)
@@ -39,7 +39,7 @@ class NeewsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun reportNeew(reportRequest: ReportRequest): Response<Boolean, UnAuthenticatedException> {
+    override suspend fun reportNeew(reportRequest: ReportRequest): Response<Boolean, Throwable> {
         val reportResult = reportWritable.write(reportRequest)
         return if (reportResult.isSuccessful()){
             Success(true)

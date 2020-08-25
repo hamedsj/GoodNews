@@ -9,5 +9,5 @@ interface ApiInterface {
 
     @POST("RefreshToken")
     @FormUrlEncoded
-    fun refreshToken( @Field("refresh_token") refresh_token: String): Response<TokenResponse, UnAuthenticatedException>
+    fun refreshToken( @Field("refresh_token") refresh_token: String): Response<TokenResponse, Throwable>
 }

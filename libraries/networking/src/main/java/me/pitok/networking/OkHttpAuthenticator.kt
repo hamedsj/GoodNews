@@ -18,7 +18,7 @@ class OkHttpAuthenticator constructor(private val tokenRefresher: Readable<Token
                 response.request().newBuilder()
                     .header("AUTHORIZATION", tokenReader.read().accessToken).build()
             }
-        }catch (e: UnAuthenticatedException){
+        }catch (e: Throwable){
             null
         }
     }

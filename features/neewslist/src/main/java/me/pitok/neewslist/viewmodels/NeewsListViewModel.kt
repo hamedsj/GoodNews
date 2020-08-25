@@ -9,6 +9,7 @@ import me.pitok.coroutines.Dispatcher
 import me.pitok.neew.api.request.ReportRequest
 import me.pitok.neew.entity.NeewEntity
 import me.pitok.neew.repository.NeewsRepository
+import me.pitok.networking.CommonExceptions
 import me.pitok.networking.ifSuccessful
 import me.pitok.networking.otherwise
 import javax.inject.Inject
@@ -26,14 +27,20 @@ class NeewsListViewModel @Inject constructor(
 
     private var neews: MutableList<NeewEntity> = mutableListOf()
 
+    init {
+        fetchNeews()
+    }
 
-    fun fetchNeews(){
+    private fun fetchNeews(){
         viewModelScope.launch(dispatcher.io){
             neewsRepository.getNeews().ifSuccessful {
                 neews.addAll(it)
                 pUpdateNeewsListLiveData.value = neews
             }.otherwise {
-                pShowMessageLiveData.value = "نتونستیم اخبار جدید رو دریافت کنیم =("
+                pShowMessageLiveData.value = when(it){
+                    is CommonExceptions.ConnectionException -> "اینترنت شما قطع می‌باشد =("
+                    else -> "ارسال گزارش با خطا روبرو شد =("
+                }
             }
         }
     }
@@ -45,7 +52,10 @@ class NeewsListViewModel @Inject constructor(
             sendReportResult.ifSuccessful {
                 pShowMessageLiveData.value = "گزارش با موفقیت ارسال شد =)"
             }.otherwise {
-                pShowMessageLiveData.value = "ارسال گزارش با خطا روبرو شد =("
+                pShowMessageLiveData.value = when(it){
+                    is CommonExceptions.ConnectionException -> "اینترنت شما قطع می‌باشد =("
+                    else -> "ارسال گزارش با خطا روبرو شد =("
+                }
             }
         }
     }
