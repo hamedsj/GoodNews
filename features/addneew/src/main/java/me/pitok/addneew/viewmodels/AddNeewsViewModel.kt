@@ -70,7 +70,7 @@ class AddNeewsViewModel @Inject constructor(private val neewWritable: NeewWritab
             neewWritable
                 .write(AddNeewRequest(content, addType))
                 .ifSuccessful {
-
+                    TODO("exit from fragment")
                 }.otherwise {
                     pShowMessageLiveData.value = when(it){
                         is CommonExceptions.ConnectionException -> "اینترنت شما قطع می‌باشد =("

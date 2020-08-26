@@ -15,6 +15,10 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$library.dagger"
     implementation "com.google.android.material:material:$library.material"
 
+    implementation "com.android.support:support-compat:$library.supportcompat"
+    implementation "com.daimajia.easing:library:$library.easingyoyo"
+    implementation "com.daimajia.androidanimations:library:$library.animationsyoyo"
+
 
 
     implementation project(":libraries:dependencyinjection")
@@ -24,6 +28,9 @@ dependencies {
     implementation project(":libraries:coroutines")
     implementation project(":libraries:networking")
     implementation project(":libraries:datasource")
+    implementation project(":libraries:sharedpreferences")
+    implementation project(":libraries:androidcore")
+    implementation project(":libraries:mapper")
     implementation project(":shared:design")
     implementation project(":shared:neew")
 
