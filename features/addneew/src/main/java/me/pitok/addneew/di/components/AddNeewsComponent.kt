@@ -17,7 +17,7 @@ import me.pitok.neew.di.components.NeewsComponent
     ]
 )
 interface AddNeewsComponent {
-    fun bindNeewsListViewModel(): ViewModelFactory
+    fun bindAddNeewsViewModel(): ViewModelFactory
 
-    fun inject(neewsListFragment: AddNeewsFragment)
+    fun inject(addNeewsFragment: AddNeewsFragment)
 }

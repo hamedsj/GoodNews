@@ -1,14 +1,14 @@
 package me.pitok.addneew.viewmodels
 
 import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import me.pitok.addneew.states.AddNeewsViewState
+import me.pitok.addneew.views.AddNeewsFragment
 import me.pitok.coroutines.Dispatcher
 import me.pitok.lifecycle.update
+import me.pitok.navigation.Navigate
 import me.pitok.neew.NeewAddType
 import me.pitok.neew.api.request.AddNeewRequest
 import me.pitok.neew.datasource.NeewWritable
@@ -27,6 +27,10 @@ class AddNeewsViewModel @Inject constructor(private val neewWritable: NeewWritab
 
     private val pShowMessageLiveData = MutableLiveData<String>()
     val showMessageLiveData : LiveData<String> = pShowMessageLiveData
+
+    private val pNavigationObservable = MutableLiveData<Navigate>()
+    val navigationObservable : LiveData<Navigate> = pNavigationObservable
+
 
 
     private var addType: NeewAddType = NeewAddType.ByContent
@@ -70,7 +74,7 @@ class AddNeewsViewModel @Inject constructor(private val neewWritable: NeewWritab
             neewWritable
                 .write(AddNeewRequest(content, addType))
                 .ifSuccessful {
-                    TODO("exit from fragment")
+                    pNavigationObservable.value = Navigate.Up
                 }.otherwise {
                     pShowMessageLiveData.value = when(it){
                         is CommonExceptions.ConnectionException -> "اینترنت شما قطع می‌باشد =("
@@ -79,4 +83,12 @@ class AddNeewsViewModel @Inject constructor(private val neewWritable: NeewWritab
                 }
         }
     }
+
+    fun onBackClickListener(view: View){
+        viewModelScope.launch(dispatcher.main) {
+            delay(AddNeewsFragment.CLICK_ANIMATION_DURATION)
+            pNavigationObservable.value = Navigate.Up
+        }
+    }
+
 }

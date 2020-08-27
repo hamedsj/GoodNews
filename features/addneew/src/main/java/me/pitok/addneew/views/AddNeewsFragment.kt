@@ -6,7 +6,6 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import com.daimajia.androidanimations.library.Techniques
@@ -22,7 +21,6 @@ import me.pitok.addneew.states.AddNeewsViewState
 import me.pitok.addneew.viewmodels.AddNeewsViewModel
 import me.pitok.coroutines.Dispatcher
 import me.pitok.lifecycle.ViewModelFactory
-import me.pitok.navigation.Navigate
 import me.pitok.navigation.observeNavigation
 import me.pitok.neew.NeewAddType
 import javax.inject.Inject
@@ -31,6 +29,7 @@ class AddNeewsFragment : Fragment(R.layout.fragment_add_neews) {
 
     companion object{
         const val FLOATING_BUTTON_ANIM_DURATION = 200L
+        const val CLICK_ANIMATION_DURATION = 100L
     }
 
     @Inject
@@ -41,8 +40,6 @@ class AddNeewsFragment : Fragment(R.layout.fragment_add_neews) {
 
     private val addNeewsViewModel: AddNeewsViewModel by viewModels{ viewModelFactory }
 
-    private val navigationObservable = MutableLiveData<Navigate>()
-
     private var lastViewState: AddNeewsViewState? = null
 
     override fun onAttach(context: Context) {
@@ -52,12 +49,12 @@ class AddNeewsFragment : Fragment(R.layout.fragment_add_neews) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navigationObservable.observeNavigation(this)
+        addNeewsViewModel.navigationObservable.observeNavigation(this)
         addNeewsContentEt.addTextChangedListener(afterTextChanged = {
             addNeewsViewModel.onContentChangedListener(it.toString())
         })
         addNeewsTypeFb.setOnClickListener(addNeewsViewModel::onChangeTypeClick)
-        addNeewsBackIc.setOnClickListener(::onBackClickListener)
+        addNeewsBackIc.setOnClickListener(addNeewsViewModel::onBackClickListener)
         addNeewsSendBt.setOnClickListener{
             it.isEnabled = false
             addNeewsViewModel.sendNeews(addNeewsContentEt.text.toString().trim())
@@ -94,9 +91,5 @@ class AddNeewsFragment : Fragment(R.layout.fragment_add_neews) {
 
     private fun showMessage(message:String){
         Snackbar.make(addNeewsRoot,message,Snackbar.LENGTH_LONG).show()
-    }
-
-    private fun onBackClickListener(view: View){
-        navigationObservable.value = Navigate.Up
     }
 }
