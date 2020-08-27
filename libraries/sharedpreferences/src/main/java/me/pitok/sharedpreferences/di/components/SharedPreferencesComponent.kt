@@ -8,6 +8,7 @@ import me.pitok.datasource.Writable
 import me.pitok.dependencyinjection.library.LibraryScope
 import me.pitok.sharedpreferences.StoreModel
 import me.pitok.sharedpreferences.di.modules.SharedPreferencesModule
+import me.pitok.sharedpreferences.di.qulifiers.SettingsSP
 import me.pitok.sharedpreferences.di.qulifiers.TokenSP
 
 @LibraryScope
@@ -25,4 +26,18 @@ interface SharedPreferencesComponent {
 
     @TokenSP
     fun provideTokenWriterImpl(): Writable<StoreModel<String>>
+
+    @SettingsSP
+    fun provideSettingsSharedPreferences(): SharedPreferences
+
+    @SettingsSP
+    fun provideSettingsSharedPreferencesEditor(): SharedPreferences.Editor
+
+
+    @SettingsSP
+    fun provideSettingsReaderImpl(): Readable.IO<String, String>
+
+    @SettingsSP
+    fun provideSettingsWriterImpl(): Writable<StoreModel<String>>
+
 }

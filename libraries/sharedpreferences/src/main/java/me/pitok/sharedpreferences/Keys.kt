@@ -5,5 +5,6 @@ class Keys {
         const val ACCESS_TOKEN_KEY = "access_token"
         const val REFRESH_TOKEN_KEY = "refresh_token"
         const val TOKENS_SP_NAME = "tokens"
+        const val SETTINGS_SP_NAME = "settings"
     }
 }
