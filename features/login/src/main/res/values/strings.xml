@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="username">نام کاربری</string>
+    <string name="password">کلمه عبور</string>
+    <string name="welcome_to_goodnews">به خوش‌خبر خوش اومدید =)</string>
+    <string name="login">ورود</string>
+    <string name="login_to_account">ورود به حساب کاربری</string>
+    <string name="signup">ثبت نام</string>
+    <string name="create_an_account">ساخت حساب کاربری</string>
+    <string name="confirm_password">تایید کلمه عبور</string>
+</resources>

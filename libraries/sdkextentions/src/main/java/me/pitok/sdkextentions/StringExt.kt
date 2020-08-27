@@ -8,3 +8,7 @@ fun String.en2pr(): String {
     }
     return result
 }
+
+fun String.isValidPassword(): Boolean {
+    return (length >= 6)
+}

@@ -1,3 +1,4 @@
+include ':features:login'
 include ':features:settings'
 include ':features:addneew'
 include ':shared:design'
