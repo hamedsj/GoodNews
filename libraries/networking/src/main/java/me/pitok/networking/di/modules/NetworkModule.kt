@@ -13,9 +13,7 @@ import me.pitok.networking.OkHttpAuthenticator
 import me.pitok.networking.dataSource.TokenResponseToEntityMapper
 import me.pitok.networking.dataSource.TokenResponseToTokenEntity
 import me.pitok.networking.di.scopes.NetworkScope
-import me.pitok.networking.tokenController.TokenReader
-import me.pitok.networking.tokenController.TokenRefresher
-import me.pitok.networking.tokenController.TokenWriter
+import me.pitok.networking.tokenController.*
 import me.pitok.sharedpreferences.StoreModel
 import me.pitok.sharedpreferences.di.qulifiers.TokenSP
 import okhttp3.Cache
@@ -49,13 +47,13 @@ class NetworkModule {
 
     @Provides
     @NetworkScope
-    fun provideTokenWriter(@TokenSP spTokenWriter: Writable<StoreModel<String>>): TokenWriter{
+    fun provideTokenWriter(@TokenSP spTokenWriter: Writable<StoreModel<String>>): TokenWritable{
         return TokenWriter(spTokenWriter)
     }
 
     @Provides
     @NetworkScope
-    fun provideTokenReader(@TokenSP spTokenReader: Readable.IO<String, String>): TokenReader{
+    fun provideTokenReader(@TokenSP spTokenReader: Readable.IO<String, String>): TokenReadable{
         return TokenReader(spTokenReader)
     }
 
@@ -71,8 +69,8 @@ class NetworkModule {
     @NetworkScope
     fun provideOkHttpAuthenticator(
         tokenRefresher: TokenRefresher,
-        tokenWriter: TokenWriter,
-        tokenReader: TokenReader
+        tokenWriter: TokenWritable,
+        tokenReader: TokenReadable
     ): OkHttpAuthenticator {
         return OkHttpAuthenticator(
             tokenRefresher,
@@ -83,7 +81,7 @@ class NetworkModule {
 
     @Provides
     @NetworkScope
-    fun provideAuthorizationInterceptor(tokenReader: TokenReader): AuthorizationInterceptor {
+    fun provideAuthorizationInterceptor(tokenReader: TokenReadable): AuthorizationInterceptor {
         return AuthorizationInterceptor(tokenReader)
     }
 

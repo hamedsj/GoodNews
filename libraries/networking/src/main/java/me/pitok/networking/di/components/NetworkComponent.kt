@@ -2,16 +2,15 @@ package me.pitok.networking.di.components
 
 import dagger.Component
 import me.pitok.androidcore.components.AndroidCoreComponent
-import me.pitok.dependencyinjection.library.LibraryScope
 import me.pitok.networking.ApiInterface
 import me.pitok.networking.AuthorizationInterceptor
 import me.pitok.networking.OkHttpAuthenticator
 import me.pitok.networking.dataSource.TokenResponseToEntityMapper
 import me.pitok.networking.di.modules.NetworkModule
 import me.pitok.networking.di.scopes.NetworkScope
-import me.pitok.networking.tokenController.TokenReader
+import me.pitok.networking.tokenController.TokenReadable
 import me.pitok.networking.tokenController.TokenRefresher
-import me.pitok.networking.tokenController.TokenWriter
+import me.pitok.networking.tokenController.TokenWritable
 import me.pitok.sharedpreferences.di.components.SharedPreferencesComponent
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -30,9 +29,9 @@ interface NetworkComponent{
 
     fun provideTokenResponseToEntityMapper(): TokenResponseToEntityMapper
 
-    fun provideTokenWriter(): TokenWriter
+    fun provideTokenWriter(): TokenWritable
 
-    fun provideTokenReader(): TokenReader
+    fun provideTokenReader(): TokenReadable
 
     fun provideTokenRefresher(): TokenRefresher
 
