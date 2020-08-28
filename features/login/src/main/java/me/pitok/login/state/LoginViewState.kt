@@ -8,13 +8,13 @@ import me.pitok.sdkextentions.CircuitBoolean
 
 
 data class LoginViewState(
-    val isPositiveButtonEnabled: CircuitBoolean = CircuitBoolean(
+    val isLoginButtonEnabled: CircuitBoolean = CircuitBoolean(
         switches = mapOf(
             USERNAME_FIELD_SWITCH to false,
             PASSWORD_FIELD_SWITCH to false
         )
     ),
-    val isNegativeButtonEnabled: CircuitBoolean = CircuitBoolean(
+    val isSignUpButtonEnabled: CircuitBoolean = CircuitBoolean(
         switches = mapOf(
             USERNAME_FIELD_SWITCH to false,
             PASSWORD_FIELD_SWITCH to false,
@@ -22,6 +22,7 @@ data class LoginViewState(
         )
     ),
     val viewMode: LoginViewMode = LoginViewMode.LoginMode,
+    val lastUsername: String = "",
     val lastPassword: String = "",
     val lastConfirmPassword: String = ""
 )
