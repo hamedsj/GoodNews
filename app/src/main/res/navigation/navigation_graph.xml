@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@+id/navigation_login"
+    tools:ignore="InvalidNavigation,UnusedNavigation">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="me.pitok.neewslist.views.NeewListFragment"
+        tools:layout="@layout/fragment_neews_list">
+        <deepLink app:uri="@string/deeplink_home"/>
+        <deepLink app:uri="@string/deeplink_start"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="me.pitok.login.views.LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <deepLink app:uri="@string/deeplink_login"/>
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_add_neew"
+        android:name="me.pitok.addneew.views.AddNeewsFragment"
+        tools:layout="@layout/fragment_add_neews">
+        <deepLink app:uri="@string/deeplink_add_news"/>
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="me.pitok.settings.views.SettingsFragment"
+        tools:layout="@layout/fragment_neews_list">
+        <deepLink app:uri="@string/deeplink_settings"/>
+    </fragment>
+
+
+</navigation>
