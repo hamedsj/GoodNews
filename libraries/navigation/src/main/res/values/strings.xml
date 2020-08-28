@@ -2,4 +2,6 @@
 <resources>
     <string name="deeplink_start">gn://start</string>
     <string name="deeplink_settings">gn://settings</string>
+    <string name="deeplink_home">gn://home</string>
+    <string name="deeplink_add_news">gn://add_news</string>
 </resources>
