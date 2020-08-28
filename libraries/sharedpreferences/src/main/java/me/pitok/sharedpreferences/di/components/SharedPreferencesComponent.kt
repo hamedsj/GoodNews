@@ -3,13 +3,12 @@ package me.pitok.sharedpreferences.di.components
 import android.content.SharedPreferences
 import dagger.Component
 import me.pitok.androidcore.components.AndroidCoreComponent
-import me.pitok.datasource.Readable
-import me.pitok.datasource.Writable
 import me.pitok.dependencyinjection.library.LibraryScope
-import me.pitok.sharedpreferences.StoreModel
 import me.pitok.sharedpreferences.di.modules.SharedPreferencesModule
 import me.pitok.sharedpreferences.di.qulifiers.SettingsSP
 import me.pitok.sharedpreferences.di.qulifiers.TokenSP
+import me.pitok.sharedpreferences.typealiases.SpReader
+import me.pitok.sharedpreferences.typealiases.SpWriter
 
 @LibraryScope
 @Component(modules = [SharedPreferencesModule::class], dependencies = [AndroidCoreComponent::class])
@@ -22,10 +21,10 @@ interface SharedPreferencesComponent {
     fun provideTokenSharedPreferencesEditor(): SharedPreferences.Editor
 
     @TokenSP
-    fun provideTokenReaderImpl(): Readable.IO<String, String>
+    fun provideTokenReaderImpl(): SpReader
 
     @TokenSP
-    fun provideTokenWriterImpl(): Writable<StoreModel<String>>
+    fun provideTokenWriterImpl(): SpWriter
 
     @SettingsSP
     fun provideSettingsSharedPreferences(): SharedPreferences
@@ -35,9 +34,9 @@ interface SharedPreferencesComponent {
 
 
     @SettingsSP
-    fun provideSettingsReaderImpl(): Readable.IO<String, String>
+    fun provideSettingsReaderImpl(): SpReader
 
     @SettingsSP
-    fun provideSettingsWriterImpl(): Writable<StoreModel<String>>
+    fun provideSettingsWriterImpl(): SpWriter
 
 }

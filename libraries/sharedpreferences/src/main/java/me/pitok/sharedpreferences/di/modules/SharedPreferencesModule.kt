@@ -5,19 +5,16 @@ import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import me.pitok.androidcore.qulifiers.ApplicationContext
-import me.pitok.datasource.Readable
-import me.pitok.datasource.Writable
 import me.pitok.dependencyinjection.library.LibraryScope
 import me.pitok.sharedpreferences.Keys
-import me.pitok.sharedpreferences.StoreModel
-import me.pitok.sharedpreferences.typealiases.SpReader
-import me.pitok.sharedpreferences.typealiases.SpWriter
 import me.pitok.sharedpreferences.di.qulifiers.SettingsSP
 import me.pitok.sharedpreferences.di.qulifiers.TokenSP
 import me.pitok.sharedpreferences.settings.SettingReaderImpl
 import me.pitok.sharedpreferences.settings.SettingWriterImpl
 import me.pitok.sharedpreferences.tokens.TokenReaderImpl
 import me.pitok.sharedpreferences.tokens.TokenWriterImpl
+import me.pitok.sharedpreferences.typealiases.SpReader
+import me.pitok.sharedpreferences.typealiases.SpWriter
 
 @Module
 class SharedPreferencesModule{
@@ -53,14 +50,14 @@ class SharedPreferencesModule{
     @Provides
     @LibraryScope
     @TokenSP
-    fun provideTokenReaderImpl(@TokenSP spTokens: SharedPreferences): Readable.IO<String, String>{
+    fun provideTokenReaderImpl(@TokenSP spTokens: SharedPreferences): SpReader{
         return TokenReaderImpl(spTokens)
     }
 
     @Provides
     @LibraryScope
     @TokenSP
-    fun provideTokenWriterImpl(@TokenSP tokensEditor: SharedPreferences.Editor): Writable<StoreModel<String>> {
+    fun provideTokenWriterImpl(@TokenSP tokensEditor: SharedPreferences.Editor): SpWriter {
         return TokenWriterImpl(tokensEditor)
     }
 
