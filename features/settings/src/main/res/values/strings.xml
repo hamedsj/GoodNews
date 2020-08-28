@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings">تنظیمات</string>
+    <string name="user_interface">رابط کاربری</string>
+    <string name="dark_mode">حالت تاریک</string>
+    <string name="daily_notification_count">تعداد اعلان‌های روزانه</string>
+    <string name="notifications">اعلان‌ها</string>
+</resources>

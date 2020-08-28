@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$library.kotlin"
+
+    implementation "androidx.constraintlayout:constraintlayout:$library.constraintlayout"
+    implementation "androidx.fragment:fragment-ktx:$library.fragment"
+    implementation "androidx.appcompat:appcompat:$library.appcompat"
+
+    implementation "com.google.android.material:material:$library.material"
+    implementation "com.google.dagger:dagger:$library.dagger"
+    kapt "com.google.dagger:dagger-compiler:$library.dagger"
+
+    implementation "com.daimajia.androidanimations:library:$library.animationsyoyo"
+    implementation "com.android.support:support-compat:$library.supportcompat"
+    implementation "com.daimajia.easing:library:$library.easingyoyo"
+    implementation "com.airbnb.android:lottie:$library.lottie"
+
+    implementation "com.squareup.retrofit2:converter-gson:$library.convertergson"
+    implementation "com.squareup.retrofit2:retrofit:$library.retrofit"
+    implementation "com.google.code.gson:gson:$library.gson"
+
+
+    implementation project(":libraries:dependencyinjection")
+    implementation project(":libraries:sharedpreferences")
+    implementation project(":libraries:sdkextentions")
+    implementation project(":libraries:androidcore")
+    implementation project(":libraries:datasource")
+    implementation project(":libraries:coroutines")
+    implementation project(":libraries:networking")
+    implementation project(":libraries:navigation")
+    implementation project(":libraries:lifecycle")
+    implementation project(":libraries:mapper")
+    implementation project(":shared:design")
+
+}

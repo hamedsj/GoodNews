@@ -31,7 +31,7 @@ class NeewListFragment : Fragment(R.layout.fragment_neews_list) {
     }
 
     @Inject
-    lateinit var viewModelFactory: @JvmSuppressWildcards ViewModelFactory
+    lateinit var viewModelFactory:  ViewModelFactory
 
     @Inject
     lateinit var dispatcher: Dispatcher
