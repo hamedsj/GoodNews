@@ -63,8 +63,9 @@ dependencies {
     implementation project(":features:addneew")
     implementation project(":features:login")
 
-    implementation project(":libraries:androidcore")
     implementation project(":libraries:dependencyinjection")
+    implementation project(":libraries:androidcore")
+    implementation project(":libraries:datasource")
 
 }
 
