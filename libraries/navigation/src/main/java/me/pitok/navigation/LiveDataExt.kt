@@ -13,8 +13,23 @@ fun <T : Navigate> LiveData<T>.observeNavigation(fragment: Fragment) {
                 fragment.findNavController().navigate(it.directionId.id, it.bundle)
             }
             is Navigate.ToDeepLink -> {
-                fragment.findNavController()
-                    .interModuleNavigate(it.deepLink.toUri(), serializableData = null)
+                if (it.popUpInclusive && it.destinationId != null){
+                    fragment.findNavController()
+                        .interModuleNavigate(
+                            it.deepLink.toUri(),
+                            serializableData = null,
+                            navOptions = null,
+                            popUpInclusive = true,
+                            destinationId = it.destinationId,
+                            clearBackStack = it.clearBackStack
+                        )
+                }else {
+                    fragment.findNavController()
+                        .interModuleNavigate(
+                            it.deepLink.toUri(),
+                            serializableData = null,
+                            clearBackStack = it.clearBackStack)
+                }
             }
             is Navigate.ToSerializableDeepLink -> {
                 fragment.findNavController()
