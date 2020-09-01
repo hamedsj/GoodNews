@@ -10,8 +10,13 @@ import androidx.core.animation.doOnEnd
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import me.pitok.coroutines.Dispatcher
 import me.pitok.lifecycle.ViewModelFactory
 import me.pitok.login.R
 import me.pitok.login.di.builder.LoginComponentBuilder
@@ -31,6 +36,10 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+
+    @Inject
+    lateinit var dispatchers: Dispatcher
+
 
     private val loginViewModel : LoginViewModel by viewModels{ viewModelFactory }
 
@@ -100,7 +109,6 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
             loginFieldsRoot.alpha = it.animatedValue as Float
         }
         fadeOutAnimator.doOnEnd {
-            loginFieldsRoot.visibility = View.INVISIBLE
             when (viewMode){
                 is LoginViewMode.LoginMode ->{
                     loginConfirmPassword.visibility = View.GONE
@@ -109,7 +117,12 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
                     loginConfirmPassword.visibility = View.VISIBLE
                 }
             }
-            fadeInAnimator.start()
+            lifecycleScope.launch{
+                delay(CARD_FADE_IN_ANIMATION_DURATION)
+                withContext(dispatchers.main) {
+                    fadeInAnimator.start()
+                }
+            }
         }
         fadeOutAnimator.start()
     }
