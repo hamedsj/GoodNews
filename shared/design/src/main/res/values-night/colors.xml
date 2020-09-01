@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/blue_gray_700</color>
+    <color name="colorPrimaryDark">@color/blue_gray_900</color>
+    <color name="colorPrimaryLight">@color/blue_gray_200</color>
+    <color name="colorAccent">@color/light_yellow_500</color>
+    <color name="colorTextIcon">@color/gray_900</color>
+    <color name="colorPrimaryText">@android:color/white</color>
+    <color name="colorSecondaryText">@color/gray_300</color>
+    <color name="colorDivider">@color/white_12_opacity</color>
+    <color name="colorDividerRevert">@color/black_12_opacity</color>
+    <color name="colorRipple">@color/white_22_opacity</color>
+    <color name="colorRippleRevert">@color/black_22_opacity</color>
+    <color name="colorDrawRipple">@color/white_56_opacity</color>
+    <color name="colorDrawRippleRevert">@color/black_56_opacity</color>
+    <color name="colorBackground">@color/blue_gray_900</color>
+
+    <color name="colorIconPrimary">@color/blue_gray_200</color>
+    <color name="colorIconPrimaryDark">@color/blue_gray_400</color>
+    <color name="colorTextPrimaryDark">@color/light_yellow_500</color>
+
+
+
+</resources>
