@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimaryDark">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/loginLogo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toTopOf="@+id/loginFieldsRoot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars[10]" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loginFieldsRoot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_blur_rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/loginWelcomeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/vazir"
+            android:text="@string/welcome_to_goodnews"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/loginUsername"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/shape_white_stroke"
+            android:fontFamily="@font/vazir_light"
+            android:gravity="right|center_vertical"
+            android:hint="@string/username"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorHint"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginWelcomeTxt"
+            tools:ignore="RtlHardcoded" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/loginPassword"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/shape_white_stroke"
+            android:fontFamily="@font/vazir_light"
+            android:gravity="right|center_vertical"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorHint"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginUsername"
+            tools:ignore="RtlHardcoded" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/loginConfirmPassword"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/shape_white_stroke"
+            android:fontFamily="@font/vazir_light"
+            android:gravity="right|center_vertical"
+            android:hint="@string/confirm_password"
+            android:visibility="gone"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorTextIcon"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginPassword"
+            tools:ignore="RtlHardcoded" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/loginPositiveBt"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/selector_white_button_rectangle"
+            android:fontFamily="@font/vazir_bold"
+            android:gravity="center"
+            android:text="@string/login"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginConfirmPassword" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loginPositiveLoading"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/loginPositiveBt"
+            app:layout_constraintEnd_toEndOf="@+id/loginPositiveBt"
+            app:layout_constraintStart_toStartOf="@+id/loginPositiveBt"
+            app:layout_constraintTop_toTopOf="@+id/loginPositiveBt"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="loading.json"
+            app:lottie_loop="true" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/loginNegativeBt"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/selector_transparent_button_rectangle"
+            android:fontFamily="@font/vazir_bold"
+            android:gravity="center"
+            android:text="@string/create_an_account"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginPositiveBt" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
