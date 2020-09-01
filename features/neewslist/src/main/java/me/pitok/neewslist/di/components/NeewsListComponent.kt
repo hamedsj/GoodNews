@@ -1,6 +1,7 @@
 package me.pitok.neewslist.di.components
 
 import dagger.Component
+import me.pitok.androidcore.components.AndroidCoreComponent
 import me.pitok.coroutines.di.component.CoroutinesComponent
 import me.pitok.dependencyinjection.feature.FeatureScope
 import me.pitok.dependencyinjection.shared.SharedScope
@@ -14,7 +15,8 @@ import me.pitok.neewslist.views.NeewListFragment
     modules = [NeewsListViewModelModule::class],
     dependencies = [
         CoroutinesComponent::class,
-        NeewsComponent::class
+        NeewsComponent::class,
+        AndroidCoreComponent::class
     ]
 )
 interface NeewsListComponent {

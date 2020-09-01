@@ -2,6 +2,7 @@ package me.pitok.neewslist.views
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,8 +14,10 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_neews_list.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import me.pitok.coroutines.Dispatcher
 import me.pitok.design.AlertBottomSheetDialog
+import me.pitok.lifecycle.SingleLiveData
 import me.pitok.lifecycle.ViewModelFactory
 import me.pitok.navigation.Navigate
 import me.pitok.navigation.observeNavigation
@@ -40,9 +43,6 @@ class NeewListFragment : Fragment(R.layout.fragment_neews_list) {
 
     private val neewListEpoxyController = NeewListController(::showSendReportDialog)
 
-    private val navigationObservable = MutableLiveData<Navigate>()
-
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         NeewsListComponentBuilder.getComponent().inject(this)
@@ -57,22 +57,15 @@ class NeewListFragment : Fragment(R.layout.fragment_neews_list) {
         neewsListViewModel.apply {
             updateNeewsListLiveData.observe(viewLifecycleOwner,::updateNeewList)
             showMessageLiveData.observe(viewLifecycleOwner,::showMessage)
+            navigationObserver.observeNavigation(this@NeewListFragment)
         }
-
-        navigationObservable.observeNavigation(this)
-
-        neewsListSettingIc.setOnClickListener {
-            lifecycleScope.launch(dispatcher.default) {
-                delay(SHOW_ANIMATION_DELAY)
-                navigationObservable.value = Navigate.ToDeepLink(getString(R.string.deeplink_settings))
-            }
-        }
+        neewsListNewNeew.setOnClickListener(neewsListViewModel::onNewNeewClick)
+        neewsListSettingIc.setOnClickListener(neewsListViewModel::onSettingIcClick)
     }
 
     private fun updateNeewList(neewsList: List<NeewEntity>){
-        neewListEpoxyController.items.clear()
-        neewListEpoxyController.items.addAll(neewsList)
-        neewListEpoxyController.requestModelBuild()
+        Log.e("updateNeewList","called")
+        neewListEpoxyController.setData(neewsList)
     }
 
     private fun showMessage(message:String){

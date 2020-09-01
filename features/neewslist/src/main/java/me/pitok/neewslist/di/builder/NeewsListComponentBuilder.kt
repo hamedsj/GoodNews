@@ -1,5 +1,6 @@
 package me.pitok.neewslist.di.builder
 
+import me.pitok.androidcore.builder.AndroidCoreComponentBuilder
 import me.pitok.coroutines.di.builder.CoroutinesComponentBuilder
 import me.pitok.dependencyinjection.ComponentBuilder
 import me.pitok.neew.di.NeewsComponentBuilder
@@ -12,6 +13,7 @@ object NeewsListComponentBuilder: ComponentBuilder<NeewsListComponent>(){
             .builder()
             .coroutinesComponent(CoroutinesComponentBuilder.getComponent())
             .neewsComponent(NeewsComponentBuilder.getComponent())
+            .androidCoreComponent(AndroidCoreComponentBuilder.getComponent())
             .build()
     }
 
