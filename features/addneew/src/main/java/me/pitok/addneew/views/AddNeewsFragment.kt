@@ -40,7 +40,7 @@ class AddNeewsFragment : Fragment(R.layout.fragment_add_neews) {
 
     private val addNeewsViewModel: AddNeewsViewModel by viewModels{ viewModelFactory }
 
-    private var lastViewState: AddNeewsViewState? = null
+    private var lastViewState: AddNeewsViewState = AddNeewsViewState()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -68,8 +68,8 @@ class AddNeewsFragment : Fragment(R.layout.fragment_add_neews) {
 
     private fun updateState(state: AddNeewsViewState){
         addNeewsSendBt.isEnabled = state.isSendButtonEnabled
-        lastViewState?.apply {
-            if(state.addNeewType::class != addNeewType::class){
+        lastViewState.apply {
+            if((state.addNeewType === addNeewType).not()){
                 YoYo.with(Techniques.Shake)
                     .duration(FLOATING_BUTTON_ANIM_DURATION)
                     .repeat(1)
@@ -87,6 +87,7 @@ class AddNeewsFragment : Fragment(R.layout.fragment_add_neews) {
                     .playOn(addNeewsTypeFb)
             }
         }
+        lastViewState = state
     }
 
     private fun showMessage(message:String){

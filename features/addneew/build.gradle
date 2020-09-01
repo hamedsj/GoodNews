@@ -19,7 +19,8 @@ dependencies {
     implementation "com.daimajia.easing:library:$library.easingyoyo"
     implementation "com.daimajia.androidanimations:library:$library.animationsyoyo"
 
-
+    implementation "androidx.navigation:navigation-fragment-ktx:$library.navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$library.navigation"
 
     implementation project(":libraries:dependencyinjection")
     implementation project(":libraries:lifecycle")

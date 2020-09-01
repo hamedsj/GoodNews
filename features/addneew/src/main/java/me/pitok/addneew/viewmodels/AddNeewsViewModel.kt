@@ -1,12 +1,21 @@
 package me.pitok.addneew.viewmodels
 
+import android.content.Context
 import android.view.View
-import androidx.lifecycle.*
+import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import me.pitok.addneew.R
 import me.pitok.addneew.states.AddNeewsViewState
 import me.pitok.addneew.views.AddNeewsFragment
+import me.pitok.androidcore.qulifiers.ApplicationContext
 import me.pitok.coroutines.Dispatcher
+import me.pitok.lifecycle.SingleLiveData
 import me.pitok.lifecycle.update
 import me.pitok.navigation.Navigate
 import me.pitok.neew.NeewAddType
@@ -19,23 +28,20 @@ import me.pitok.sdkextentions.isValidUrlWithProtocol
 import javax.inject.Inject
 
 class AddNeewsViewModel @Inject constructor(private val neewWritable: NeewWritable,
-                                            private val dispatcher: Dispatcher): ViewModel() {
+                                            private val dispatcher: Dispatcher,
+                                            @ApplicationContext private val context:Context): ViewModel() {
 
 
-    private val pOnViewStateChangedObservable = MutableLiveData<AddNeewsViewState>()
+    private val pOnViewStateChangedObservable = MutableLiveData<AddNeewsViewState>(AddNeewsViewState())
     val onViewStateChangedObservable : LiveData<AddNeewsViewState> = pOnViewStateChangedObservable
 
     private val pShowMessageLiveData = MutableLiveData<String>()
     val showMessageLiveData : LiveData<String> = pShowMessageLiveData
 
-    private val pNavigationObservable = MutableLiveData<Navigate>()
+    private val pNavigationObservable = SingleLiveData<Navigate>()
     val navigationObservable : LiveData<Navigate> = pNavigationObservable
 
-
-
     private var addType: NeewAddType = NeewAddType.ByContent
-
-
 
     fun onChangeTypeClick(view: View){
         pOnViewStateChangedObservable.update {
@@ -70,11 +76,11 @@ class AddNeewsViewModel @Inject constructor(private val neewWritable: NeewWritab
     }
 
     fun sendNeews(content: String){
-        viewModelScope.launch(dispatcher.io) {
+        GlobalScope.launch(dispatcher.io) {
             neewWritable
                 .write(AddNeewRequest(content, addType))
                 .ifSuccessful {
-                    pNavigationObservable.value = Navigate.Up
+                    pNavigationObservable.value = Navigate.ToDeepLink(context.getString(R.string.deeplink_home))
                 }.otherwise {
                     pShowMessageLiveData.value = when(it){
                         is CommonExceptions.ConnectionException -> "اینترنت شما قطع می‌باشد =("
@@ -85,7 +91,7 @@ class AddNeewsViewModel @Inject constructor(private val neewWritable: NeewWritab
     }
 
     fun onBackClickListener(view: View){
-        viewModelScope.launch(dispatcher.main) {
+        GlobalScope.launch(dispatcher.main) {
             delay(AddNeewsFragment.CLICK_ANIMATION_DURATION)
             pNavigationObservable.value = Navigate.Up
         }
