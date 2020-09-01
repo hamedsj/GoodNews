@@ -13,11 +13,9 @@ import androidx.core.net.toUri
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import me.pitok.firebase.repository.FcmTokenRefresher
-import me.pitok.navigation.R
 import javax.inject.Inject
 
 @SuppressLint("MissingFirebaseInstanceTokenRefresh")
@@ -59,7 +57,7 @@ class FcmService : FirebaseMessagingService() {
         val channelId = remoteMessage.notification?.channelId?: return
         val defaultSongUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder= NotificationCompat.Builder(this,channelId ).run {
-//            setSmallIcon()
+            setSmallIcon(R.drawable.ic_notification)
             setContentTitle(remoteMessage.notification?.title?: "")
             setContentText(remoteMessage.notification?.body?: "")
             setAutoCancel(true)
@@ -85,7 +83,6 @@ class FcmService : FirebaseMessagingService() {
         val notificationId = (currentTime xor currentTime ushr LONG_USHR).toInt()
 
         notificationManager.notify(notificationId, notificationBuilder.build())
-        TODO("add small icon to notification")
     }
 
     override fun onNewToken(newToken: String) {
