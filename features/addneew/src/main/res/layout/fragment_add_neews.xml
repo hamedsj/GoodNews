@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/addNeewsRoot"
+    android:background="@color/colorBackground"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,7 +53,7 @@
     <View
         android:id="@+id/neewsListToolbarShadow"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="3dp"
         android:background="@drawable/toolbar_shadow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,10 +62,12 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="200dp"
+        android:paddingBottom="200dp"
         android:id="@+id/addNeewsContentEt"
         android:fontFamily="@font/vazir_medium"
         android:textColorHint="@color/colorSecondaryText"
+        android:textColor="@color/colorPrimaryText"
+        android:background="@android:color/transparent"
         android:hint="@string/enter_good_neews_hint"
         android:maxLength="280"
         tools:text="@string/lorem"
