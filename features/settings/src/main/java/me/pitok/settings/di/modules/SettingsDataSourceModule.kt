@@ -2,7 +2,7 @@ package me.pitok.settings.di.modules
 
 import dagger.Binds
 import dagger.Module
-import me.pitok.dependencyinjection.shared.SharedScope
+import dagger.Provides
 import me.pitok.settings.datasource.NotifsCountSettingReader
 import me.pitok.settings.datasource.UISettingReader
 import me.pitok.settings.entity.NotifsCount
@@ -20,5 +20,13 @@ interface SettingsDataSourceModule {
     @Binds
     @FeatureScope
     fun provideNotifsCountReadable(notifsCountDataSource: NotifsCountSettingReader): Readable<NotifsCount>
+
+    companion object{
+        @Provides
+        @FeatureScope
+        fun provideStartupTask(uiSettingReader: Readable<UIMode>) = Runnable {
+            UIMode.currentUIMode = uiSettingReader.read()
+        }
+    }
 
 }

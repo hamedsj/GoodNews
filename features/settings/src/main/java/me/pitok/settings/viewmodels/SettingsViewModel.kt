@@ -1,12 +1,19 @@
 package me.pitok.settings.viewmodels
 
+import android.content.Context
 import android.view.View
 import androidx.lifecycle.*
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import me.pitok.androidcore.qulifiers.ApplicationContext
 import me.pitok.coroutines.Dispatcher
+import me.pitok.lifecycle.SingleLiveData
+import me.pitok.settings.R
 import me.pitok.navigation.Navigate
 import me.pitok.settings.entity.NotifsCount
+import me.pitok.settings.entity.UIMode
 import me.pitok.settings.views.SettingsFragment
 import me.pitok.sharedpreferences.StoreModel
 import me.pitok.sharedpreferences.di.qulifiers.SettingsSP
@@ -14,7 +21,8 @@ import me.pitok.sharedpreferences.typealiases.SpWriter
 import javax.inject.Inject
 
 class SettingsViewModel @Inject constructor(private val dispatcher: Dispatcher,
-                                            @SettingsSP private val settingsWriter: SpWriter): ViewModel() {
+                                            @SettingsSP private val settingsWriter: SpWriter,
+                                            @ApplicationContext private val context:Context): ViewModel() {
 
     companion object{
         const val UI_MODE_KEY = "ui_mode"
@@ -45,26 +53,29 @@ class SettingsViewModel @Inject constructor(private val dispatcher: Dispatcher,
 
     }
 
-    private val pNavigationObservable = MutableLiveData<Navigate>()
+    private val pNavigationObservable = SingleLiveData<Navigate>()
     val navigationObservable : LiveData<Navigate> = pNavigationObservable
 
     fun onBackClick(view: View){
-        viewModelScope.launch(dispatcher.main) {
+        GlobalScope.launch(dispatcher.main) {
             delay(SettingsFragment.CLICK_ANIMATION_DURATION)
             pNavigationObservable.value = Navigate.Up
         }
     }
 
     fun onDarkModeClick(darkMode: Boolean){
-        viewModelScope.launch(dispatcher.io) {
+        GlobalScope.launch(dispatcher.io) {
             settingsWriter.write(
                 StoreModel(
                     UI_MODE_KEY,
                     if (darkMode) DARK_MODE_VALUE else LIGHT_MODE_VALUE
                 )
             )
+            UIMode.currentUIMode = if (!darkMode) UIMode.LightMode else UIMode.DarkMode
             delay(SettingsFragment.VIEW_RECREATE_DURATION)
-            pNavigationObservable.value = Navigate.Recreate
+            withContext(dispatcher.main) {
+                pNavigationObservable.value = Navigate.Recreate
+            }
         }
     }
 

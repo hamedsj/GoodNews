@@ -55,6 +55,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         settingsViewModel.navigationObservable.observeNavigation(this@SettingsFragment)
         settingsBackIc.setOnClickListener(settingsViewModel::onBackClick)
         settingsDarkModeClick.setOnClickListener{
+            settingsDarkModeSw.isChecked = settingsDarkModeSw.isChecked.not()
             settingsViewModel.onDarkModeClick(settingsDarkModeSw.isChecked)
         }
         settingsNotifsCountSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{

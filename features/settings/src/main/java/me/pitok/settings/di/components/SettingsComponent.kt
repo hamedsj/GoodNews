@@ -1,6 +1,8 @@
 package me.pitok.settings.di.components
 
+import android.app.Activity
 import dagger.Component
+import me.pitok.androidcore.components.AndroidCoreComponent
 import me.pitok.coroutines.di.component.CoroutinesComponent
 import me.pitok.datasource.Readable
 import me.pitok.dependencyinjection.feature.FeatureScope
@@ -20,7 +22,8 @@ import me.pitok.sharedpreferences.di.components.SharedPreferencesComponent
     ],
     dependencies = [
         CoroutinesComponent::class,
-        SharedPreferencesComponent::class
+        SharedPreferencesComponent::class,
+        AndroidCoreComponent::class
     ]
 )
 interface SettingsComponent {
@@ -29,6 +32,8 @@ interface SettingsComponent {
     fun provideUIReadable(): Readable<UIMode>
 
     fun provideNotifsCountReadable(): Readable<NotifsCount>
+
+    fun provideStartupTask(): Runnable
 
     fun inject(settingsFragment: SettingsFragment)
 }

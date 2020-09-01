@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/settingsViewRoot">
+    android:id="@+id/settingsViewRoot"
+    android:background="@color/colorBackground"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/settingsToolbar"
@@ -60,7 +62,7 @@
         android:layout_marginRight="12dp"
         android:fontFamily="@font/vazir_black"
         android:text="@string/user_interface"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorTextPrimaryDark"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsToolbar"
@@ -112,7 +114,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/vazir_black"
         android:text="@string/notifications"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorTextPrimaryDark"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsDarkModeTitle"

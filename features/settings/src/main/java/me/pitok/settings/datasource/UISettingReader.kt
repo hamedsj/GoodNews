@@ -12,7 +12,7 @@ class UISettingReader @Inject constructor(
 ): Readable<UIMode>{
     override fun read(): UIMode {
         return when(spSettings.read(SettingsViewModel.UI_MODE_KEY)){
-            SettingsViewModel.LIGHT_MODE_VALUE -> UIMode.DarkMode
+            SettingsViewModel.LIGHT_MODE_VALUE -> UIMode.LightMode
             else -> UIMode.DarkMode
         }
     }
