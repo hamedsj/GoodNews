@@ -17,5 +17,5 @@ include ':libraries:sharedpreferences'
 include ':libraries:datasource'
 include ':libraries:networking'
 include ':libraries:sdkextentions'
-include ':app'
+include ':climax:main'
 rootProject.name = "Good News"

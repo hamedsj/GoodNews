@@ -20,6 +20,9 @@ android {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
         }
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
 
         multiDexEnabled true
     }
@@ -53,9 +56,16 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$library.navigation"
 
     implementation "com.google.dagger:dagger:$library.dagger"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     kapt "com.google.dagger:dagger-compiler:$library.dagger"
 
     implementation "androidx.multidex:multidex:$library.multidex"
+
+    implementation "com.daimajia.androidanimations:library:$library.animationsyoyo"
+    implementation "com.android.support:support-compat:$library.supportcompat"
+    implementation "com.daimajia.easing:library:$library.easingyoyo"
+    implementation "com.airbnb.android:lottie:$library.lottie"
+
 
 
     implementation project(":features:neewslist")
@@ -64,8 +74,15 @@ dependencies {
     implementation project(":features:login")
 
     implementation project(":libraries:dependencyinjection")
+    implementation project(":libraries:sharedpreferences")
+    implementation project(":libraries:sdkextentions")
     implementation project(":libraries:androidcore")
     implementation project(":libraries:datasource")
+    implementation project(":libraries:coroutines")
+    implementation project(":libraries:navigation")
+    implementation project(":libraries:networking")
+    implementation project(":libraries:lifecycle")
+    implementation project(":shared:design")
 
 }
 
