@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_add_neew"
+    tools:ignore="InvalidNavigation,UnusedNavigation">
+
+    <fragment
+        android:id="@+id/navigation_add_neew"
+        android:name="me.pitok.addneew.views.AddNeewsFragment"
+        tools:layout="@layout/fragment_add_neews">
+        <deepLink app:uri="@string/deeplink_add_news"/>
+    </fragment>
+
+
+</navigation>

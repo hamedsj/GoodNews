@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_login"
+    app:startDestination="@+id/navigation_login_frag"
+    tools:ignore="InvalidNavigation,UnusedNavigation">
+
+    <fragment
+        android:id="@+id/navigation_login_frag"
+        android:name="me.pitok.login.views.LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <deepLink app:uri="@string/deeplink_login"/>
+    </fragment>
+
+
+</navigation>
