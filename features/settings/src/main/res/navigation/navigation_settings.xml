@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_settings"
-    tools:ignore="InvalidNavigation,UnusedNavigation">
+    app:startDestination="@+id/navigation_settings_frag"
+    tools:ignore="UnusedNavigation">
 
     <fragment
-        android:id="@+id/navigation_settings"
+        android:id="@+id/navigation_settings_frag"
         android:name="me.pitok.settings.views.SettingsFragment"
         tools:layout="@layout/fragment_settings">
         <deepLink app:uri="@string/deeplink_settings"/>
