@@ -14,20 +14,23 @@
     <color name="colorDrawRipple">@color/black_56_opacity</color>
     <color name="colorDrawRippleRevert">@color/white_56_opacity</color>
     <color name="colorBackground">@android:color/white</color>
+    <color name="colorHint">@color/gray_500</color>
 
     <color name="colorIconPrimary">@color/blue_gray_700</color>
     <color name="colorIconPrimaryDark">@color/blue_gray_900</color>
     <color name="colorTextPrimaryDark">@color/blue_gray_900</color>
 
-    <color name="blue_gray_700">#607D8B</color>
-    <color name="blue_gray_900">#455A64</color>
     <color name="blue_gray_200">#CFD8DC</color>
     <color name="blue_gray_300">#b0bec5</color>
     <color name="blue_gray_400">#90a4ae</color>
+    <color name="blue_gray_700">#607D8B</color>
+    <color name="blue_gray_900">#455A64</color>
 
     <color name="light_yellow_500">#FFEB3B</color>
 
     <color name="gray_300">#EEEEEE</color>
+    <color name="gray_400">#e0e0e0</color>
+    <color name="gray_500">#bdbdbd</color>
     <color name="gray_600">#757575</color>
     <color name="gray_900">#212121</color>
 
