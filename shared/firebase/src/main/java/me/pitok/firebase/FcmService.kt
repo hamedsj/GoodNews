@@ -12,17 +12,26 @@ import androidx.core.app.NotificationCompat
 import androidx.core.net.toUri
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import me.pitok.firebase.repository.FcmTokenRefresher
+import me.pitok.coroutines.Dispatcher
+import me.pitok.datasource.Readable
+import me.pitok.firebase.di.builder.FcmComponentBuilder
+import me.pitok.firebase.repository.FcmTokenRefreshable
+import me.pitok.options.entities.NotifsCount
+import java.util.*
 import javax.inject.Inject
 
 @SuppressLint("MissingFirebaseInstanceTokenRefresh")
 class FcmService : FirebaseMessagingService() {
 
-    @Inject lateinit var fcmTokenRefresher: FcmTokenRefresher
-    @Inject lateinit var ioDispatcher: CoroutineDispatcher
+    @Inject lateinit var fcmTokenRefresher: FcmTokenRefreshable
+    @Inject lateinit var dispatcher: Dispatcher
+    @Inject lateinit var notificationSettingsReader : Readable<NotifsCount>
+
+    init {
+        FcmComponentBuilder.getComponent().inject(this)
+    }
 
     companion object{
         const val TYPE_KEY = "type"
@@ -42,6 +51,20 @@ class FcmService : FirebaseMessagingService() {
     }
 
     private fun handleNotification(remoteMessage: RemoteMessage) {
+        val notifCount = notificationSettingsReader.read()
+        val hour = Calendar.getInstance().get(Calendar.HOUR)
+        when(notifCount){
+            is NotifsCount.None -> {return}
+            is NotifsCount.Every12Hours -> {
+                if (hour % 12 != 0) return
+            }
+            is NotifsCount.Every6Hours -> {
+                if (hour % 6 != 0) return
+            }
+            is NotifsCount.Every3Hours -> {
+                if (hour % 3 != 0) return
+            }
+        }
         val clickIntent = Intent(Intent.ACTION_VIEW).apply {
             `package` = packageName
             data = getString(R.string.deeplink_start).toUri()
@@ -87,7 +110,7 @@ class FcmService : FirebaseMessagingService() {
 
     override fun onNewToken(newToken: String) {
         super.onNewToken(newToken)
-        GlobalScope.launch(ioDispatcher) {
+        GlobalScope.launch(dispatcher.io) {
             fcmTokenRefresher.write(newToken)
         }
     }

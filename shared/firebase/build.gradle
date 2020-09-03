@@ -17,8 +17,13 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$library.coroutines"
 
     implementation project(":libraries:dependencyinjection")
+    implementation project(":libraries:sharedpreferences")
+    implementation project(":libraries:androidcore")
     implementation project(":libraries:navigation")
     implementation project(":libraries:networking")
     implementation project(":libraries:datasource")
+    implementation project(":libraries:coroutines")
+    implementation project(":libraries:mapper")
+    implementation project(":shared:options")
 
 }
