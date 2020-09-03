@@ -2,11 +2,9 @@ package me.pitok.addneew.viewmodels
 
 import android.content.Context
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -30,6 +28,12 @@ import javax.inject.Inject
 class AddNeewsViewModel @Inject constructor(private val neewWritable: NeewWritable,
                                             private val dispatcher: Dispatcher,
                                             @ApplicationContext private val context:Context): ViewModel() {
+
+
+    companion object{
+        const val ENTER_LINK_HINT = "لینک توییت را وارد کنید"
+        const val ENTER_CONTENT_HINT = "خب دیگه چه خبر؟"
+    }
 
 
     private val pOnViewStateChangedObservable = MutableLiveData<AddNeewsViewState>(AddNeewsViewState())
@@ -62,13 +66,22 @@ class AddNeewsViewModel @Inject constructor(private val neewWritable: NeewWritab
         pOnViewStateChangedObservable.update {
             when(addNeewType){
                 is NeewAddType.ByContent -> {
-                        copy(isSendButtonEnabled = (content.trim().length in 1..280))
+                        copy(
+                            isSendButtonEnabled = (content.trim().length in 1..280),
+                            lastContentEntered =  content
+                        )
                 }
                 is NeewAddType.ByLink -> {
                     if (content.trim().isEmpty()) {
-                        copy(isSendButtonEnabled = false)
+                        copy(
+                            isSendButtonEnabled = false,
+                            lastLinkEntered = content
+                        )
                     }else{
-                        copy(isSendButtonEnabled = content.isValidUrlWithProtocol())
+                        copy(
+                            isSendButtonEnabled = content.isValidUrlWithProtocol(),
+                            lastLinkEntered = content
+                        )
                     }
                 }
             }

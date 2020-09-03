@@ -63,7 +63,7 @@ class AddNeewsFragment : Fragment(R.layout.fragment_add_neews) {
             onViewStateChangedObservable.observe(viewLifecycleOwner,::updateState)
             showMessageLiveData.observe(viewLifecycleOwner,::showMessage)
         }
-
+        addNeewsContentEt.hint = AddNeewsViewModel.ENTER_CONTENT_HINT
     }
 
     private fun updateState(state: AddNeewsViewState){
@@ -77,10 +77,18 @@ class AddNeewsFragment : Fragment(R.layout.fragment_add_neews) {
                         lifecycleScope.launch {
                             delay(FLOATING_BUTTON_ANIM_DURATION/2)
                             withContext(dispatcher.main){
-                                addNeewsTypeFb.setImageResource(when(state.addNeewType){
-                                    is NeewAddType.ByLink -> R.drawable.ic_twitter
-                                    is NeewAddType.ByContent -> R.drawable.ic_text
-                                })
+                                when(state.addNeewType){
+                                    is NeewAddType.ByLink -> {
+                                        addNeewsTypeFb.setImageResource(R.drawable.ic_twitter)
+                                        addNeewsContentEt.setText(state.lastLinkEntered)
+                                        addNeewsContentEt.hint = AddNeewsViewModel.ENTER_LINK_HINT
+                                    }
+                                    is NeewAddType.ByContent -> {
+                                        addNeewsTypeFb.setImageResource(R.drawable.ic_text)
+                                        addNeewsContentEt.setText(state.lastContentEntered)
+                                        addNeewsContentEt.hint = AddNeewsViewModel.ENTER_CONTENT_HINT
+                                    }
+                                }
                             }
                         }
                     }
