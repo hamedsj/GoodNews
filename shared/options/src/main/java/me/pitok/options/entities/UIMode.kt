@@ -1,4 +1,4 @@
-package me.pitok.settings.entity
+package me.pitok.options.entities
 
 sealed class UIMode {
     object DarkMode : UIMode()

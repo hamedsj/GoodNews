@@ -24,6 +24,7 @@ dependencies {
     implementation project(":libraries:coroutines")
     implementation project(":libraries:navigation")
     implementation project(":libraries:lifecycle")
+    implementation project(":shared:options")
     implementation project(":shared:design")
 
 }
