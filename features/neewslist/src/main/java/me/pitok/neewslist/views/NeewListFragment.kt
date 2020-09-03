@@ -2,11 +2,9 @@ package me.pitok.neewslist.views
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,9 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.pitok.coroutines.Dispatcher
 import me.pitok.design.AlertBottomSheetDialog
-import me.pitok.lifecycle.SingleLiveData
 import me.pitok.lifecycle.ViewModelFactory
-import me.pitok.navigation.Navigate
 import me.pitok.navigation.observeNavigation
 import me.pitok.neew.entity.NeewEntity
 import me.pitok.neewslist.R
@@ -64,8 +60,8 @@ class NeewListFragment : Fragment(R.layout.fragment_neews_list) {
     }
 
     private fun updateNeewList(neewsList: List<NeewEntity>){
-        Log.e("updateNeewList","called")
-        neewListEpoxyController.setData(neewsList)
+        neewListEpoxyController.items = neewsList
+        neewListEpoxyController.requestModelBuild()
     }
 
     private fun showMessage(message:String){
@@ -79,13 +75,30 @@ class NeewListFragment : Fragment(R.layout.fragment_neews_list) {
             title = getString(R.string.send_report_dialog_title)
             onOkClickListener = {
                 neewsListViewModel.sendReport(position)
-                dismiss()
+                lifecycleScope.launch{
+                    delay(SHOW_ANIMATION_DELAY)
+                    withContext(dispatcher.main){
+                        dismiss()
+                    }
+                }
             }
             onCancelClickListener = {
-                dismiss()
+                lifecycleScope.launch{
+                    delay(SHOW_ANIMATION_DELAY)
+                    withContext(dispatcher.main){
+                        dismiss()
+                    }
+                }
             }
+            okBtText = "ارسال"
+            cancelBtText = "لغو"
         }.run {
-            show()
+            lifecycleScope.launch{
+                delay(SHOW_ANIMATION_DELAY)
+                withContext(dispatcher.main){
+                    show()
+                }
+            }
         }
     }
 

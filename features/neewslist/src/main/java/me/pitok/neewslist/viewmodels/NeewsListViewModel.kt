@@ -46,31 +46,19 @@ class NeewsListViewModel @Inject constructor(
 
     private fun fetchNeews(){
         viewModelScope.launch(dispatcher.io){
-            for (i in 0..20) {
-                neews.add(
-                    NeewEntity(
-                        1,
-                        "loremloremloremloremloremloremloremloremloremloremloremloremloremloremlorem",
-                        Date(2020, 5, 20)
-                    )
-                )
+            neewsRepository.getNeews().ifSuccessful {
+                neews.addAll(it)
+                withContext(dispatcher.main) {
+                    pUpdateNeewsListLiveData.value = neews
+                }
+            }.otherwise {
+                withContext(dispatcher.main) {
+                    pShowMessageLiveData.value = when (it) {
+                        is CommonExceptions.ConnectionException -> "اینترنت شما قطع می‌باشد =("
+                        else -> "ارسال گزارش با خطا روبرو شد =("
+                    }
+                }
             }
-            withContext(dispatcher.main) {
-                pUpdateNeewsListLiveData.value = neews
-            }
-//            neewsRepository.getNeews().ifSuccessful {
-//                neews.addAll(it)
-//                withContext(dispatcher.main) {
-//                    pUpdateNeewsListLiveData.value = neews
-//                }
-//            }.otherwise {
-//                withContext(dispatcher.main) {
-//                    pShowMessageLiveData.value = when (it) {
-//                        is CommonExceptions.ConnectionException -> "اینترنت شما قطع می‌باشد =("
-//                        else -> "ارسال گزارش با خطا روبرو شد =("
-//                    }
-//                }
-//            }
         }
     }
 
