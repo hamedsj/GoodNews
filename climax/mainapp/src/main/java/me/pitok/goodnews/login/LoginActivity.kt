@@ -19,12 +19,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.pitok.coroutines.Dispatcher
 import me.pitok.goodnews.R
-import me.pitok.goodnews.appMain.MainActivity
+import me.pitok.goodnews.main.MainActivity
 import me.pitok.goodnews.login.di.LoginActivityComponentBuilder
 import me.pitok.lifecycle.ViewModelFactory
 import me.pitok.login.entity.LoginViewMode
 import me.pitok.sdkextentions.setElevationByDp
-import me.pitok.settings.entity.UIMode
+import me.pitok.options.entities.UIMode
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {

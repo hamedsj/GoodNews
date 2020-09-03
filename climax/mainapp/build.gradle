@@ -82,6 +82,7 @@ dependencies {
     implementation project(":libraries:navigation")
     implementation project(":libraries:networking")
     implementation project(":libraries:lifecycle")
+    implementation project(":shared:options")
     implementation project(":shared:design")
 
 }

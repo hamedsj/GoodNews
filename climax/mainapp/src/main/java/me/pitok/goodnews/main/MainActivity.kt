@@ -1,11 +1,11 @@
-package me.pitok.goodnews.appMain
+package me.pitok.goodnews.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import me.pitok.goodnews.R
-import me.pitok.settings.entity.UIMode
+import me.pitok.options.entities.UIMode
 
 class MainActivity : AppCompatActivity() {
 
