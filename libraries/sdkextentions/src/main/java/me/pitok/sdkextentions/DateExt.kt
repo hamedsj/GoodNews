@@ -3,7 +3,8 @@ package me.pitok.sdkextentions
 import java.util.*
 
 fun Date.toLeftDate(): String{
-    val currentDate = Calendar.getInstance().time
+    val currentCalendar = Calendar.getInstance()
+    val currentDate = Date(currentCalendar.timeInMillis)
     val diffInMilliSecond = currentDate.time - time
     val diffInDays = diffInMilliSecond / (1000*60*60*24)
     return when {
