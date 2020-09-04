@@ -99,7 +99,7 @@
             android:maxLines="1"
             android:padding="8dp"
             android:textColor="@color/colorAccent"
-            android:textColorHint="@color/colorTextIcon"
+            android:textColorHint="@color/colorHint"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
