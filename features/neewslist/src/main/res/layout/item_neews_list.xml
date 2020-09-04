@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/solid_bg_primary_dark"
+    android:background="@drawable/shape_neew_item_background"
     android:layout_marginTop="12dp"
     android:layout_marginEnd="12dp"
     android:layout_marginStart="12dp">
@@ -11,7 +11,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorTextIcon"
+        android:textColor="@android:color/white"
         android:id="@+id/itemNeewsListContent"
         android:gravity="start"
         tools:text="@string/lorem"
@@ -34,9 +34,11 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:id="@+id/itemNeewsListReportIc"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:layout_below="@+id/itemNeewsListDivider"
         android:layout_alignParentStart="true"
         android:padding="10dp"
+        android:tint="@android:color/white"
         android:src="@drawable/ic_sadface"
         />
 
@@ -51,7 +53,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:gravity="center"
-        android:textColor="@color/colorTextIcon"
+        android:textColor="@android:color/white"
         tools:text="۲ هفته پیش"
         />
 

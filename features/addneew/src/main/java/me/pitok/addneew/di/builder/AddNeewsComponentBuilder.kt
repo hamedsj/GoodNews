@@ -2,6 +2,7 @@ package me.pitok.addneew.di.builder
 
 import me.pitok.addneew.di.components.AddNeewsComponent
 import me.pitok.addneew.di.components.DaggerAddNeewsComponent
+import me.pitok.androidcore.builder.AndroidCoreComponentBuilder
 import me.pitok.coroutines.di.builder.CoroutinesComponentBuilder
 import me.pitok.dependencyinjection.ComponentBuilder
 import me.pitok.neew.di.NeewsComponentBuilder
@@ -12,6 +13,7 @@ object AddNeewsComponentBuilder: ComponentBuilder<AddNeewsComponent>(){
             .builder()
             .coroutinesComponent(CoroutinesComponentBuilder.getComponent())
             .neewsComponent(NeewsComponentBuilder.getComponent())
+            .androidCoreComponent(AndroidCoreComponentBuilder.getComponent())
             .build()
     }
 

@@ -8,7 +8,10 @@ sealed class Navigate {
 
     data class ToDirection(val directionId: DirectionId, val bundle: Bundle? = null) : Navigate()
 
-    data class ToDeepLink(val deepLink: String) : Navigate()
+    data class ToDeepLink(val deepLink: String,
+                          val popUpInclusive: Boolean = false,
+                          val destinationId: Int? = null,
+                          val clearBackStack: Boolean = false) : Navigate()
 
     data class ToParcelableDeepLink(
         val deepLink: String,

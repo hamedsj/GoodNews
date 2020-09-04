@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,10 +12,10 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_neews_list.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import me.pitok.coroutines.Dispatcher
 import me.pitok.design.AlertBottomSheetDialog
 import me.pitok.lifecycle.ViewModelFactory
-import me.pitok.navigation.Navigate
 import me.pitok.navigation.observeNavigation
 import me.pitok.neew.entity.NeewEntity
 import me.pitok.neewslist.R
@@ -40,9 +39,6 @@ class NeewListFragment : Fragment(R.layout.fragment_neews_list) {
 
     private val neewListEpoxyController = NeewListController(::showSendReportDialog)
 
-    private val navigationObservable = MutableLiveData<Navigate>()
-
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         NeewsListComponentBuilder.getComponent().inject(this)
@@ -57,21 +53,14 @@ class NeewListFragment : Fragment(R.layout.fragment_neews_list) {
         neewsListViewModel.apply {
             updateNeewsListLiveData.observe(viewLifecycleOwner,::updateNeewList)
             showMessageLiveData.observe(viewLifecycleOwner,::showMessage)
+            navigationObserver.observeNavigation(this@NeewListFragment)
         }
-
-        navigationObservable.observeNavigation(this)
-
-        neewsListSettingIc.setOnClickListener {
-            lifecycleScope.launch(dispatcher.default) {
-                delay(SHOW_ANIMATION_DELAY)
-                navigationObservable.value = Navigate.ToDeepLink(getString(R.string.deeplink_settings))
-            }
-        }
+        neewsListNewNeew.setOnClickListener(neewsListViewModel::onNewNeewClick)
+        neewsListSettingIc.setOnClickListener(neewsListViewModel::onSettingIcClick)
     }
 
     private fun updateNeewList(neewsList: List<NeewEntity>){
-        neewListEpoxyController.items.clear()
-        neewListEpoxyController.items.addAll(neewsList)
+        neewListEpoxyController.items = neewsList
         neewListEpoxyController.requestModelBuild()
     }
 
@@ -86,13 +75,30 @@ class NeewListFragment : Fragment(R.layout.fragment_neews_list) {
             title = getString(R.string.send_report_dialog_title)
             onOkClickListener = {
                 neewsListViewModel.sendReport(position)
-                dismiss()
+                lifecycleScope.launch{
+                    delay(SHOW_ANIMATION_DELAY)
+                    withContext(dispatcher.main){
+                        dismiss()
+                    }
+                }
             }
             onCancelClickListener = {
-                dismiss()
+                lifecycleScope.launch{
+                    delay(SHOW_ANIMATION_DELAY)
+                    withContext(dispatcher.main){
+                        dismiss()
+                    }
+                }
             }
+            okBtText = "ارسال"
+            cancelBtText = "لغو"
         }.run {
-            show()
+            lifecycleScope.launch{
+                delay(SHOW_ANIMATION_DELAY)
+                withContext(dispatcher.main){
+                    show()
+                }
+            }
         }
     }
 

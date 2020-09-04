@@ -1,3 +1,4 @@
+include ':shared:options'
 include ':features:login'
 include ':features:settings'
 include ':features:addneew'
@@ -17,5 +18,5 @@ include ':libraries:sharedpreferences'
 include ':libraries:datasource'
 include ':libraries:networking'
 include ':libraries:sdkextentions'
-include ':app'
+include ':climax:mainapp'
 rootProject.name = "Good News"

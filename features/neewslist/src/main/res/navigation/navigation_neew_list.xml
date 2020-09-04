@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_neew_list"
+    app:startDestination="@+id/navigation_home"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="me.pitok.neewslist.views.NeewListFragment"
+        tools:layout="@layout/fragment_neews_list">
+        <deepLink app:uri="@string/deeplink_home"/>
+        <deepLink app:uri="@string/deeplink_start"/>
+    </fragment>
+
+</navigation>

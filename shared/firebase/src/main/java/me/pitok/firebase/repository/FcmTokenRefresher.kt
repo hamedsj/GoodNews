@@ -4,9 +4,10 @@ import me.pitok.datasource.Writable
 import me.pitok.firebase.repository.apis.FcmApiInterface
 import me.pitok.networking.*
 import java.io.IOException
+import javax.inject.Inject
 
 
-class FcmTokenRefresher constructor(private val fcmApiInterface: FcmApiInterface) : Writable.Suspendable<String>{
+class FcmTokenRefresher @Inject constructor(private val fcmApiInterface: FcmApiInterface) : FcmTokenRefreshable{
     override suspend fun write(input: String) {
         try {
             fcmApiInterface.refreshToken(fcm_token =  input)
@@ -17,3 +18,5 @@ class FcmTokenRefresher constructor(private val fcmApiInterface: FcmApiInterface
         }
     }
 }
+
+typealias FcmTokenRefreshable = Writable.Suspendable<String>

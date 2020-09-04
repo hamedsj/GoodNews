@@ -6,5 +6,5 @@
     android:gravity="center"
     android:fontFamily="@font/vazir"
     android:textColor="@color/colorPrimaryText"
-    android:padding="5dip"
+    android:padding="16dip"
     />

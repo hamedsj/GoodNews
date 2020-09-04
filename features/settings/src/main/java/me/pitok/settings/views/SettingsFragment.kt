@@ -15,10 +15,10 @@ import me.pitok.coroutines.Dispatcher
 import me.pitok.datasource.Readable
 import me.pitok.lifecycle.ViewModelFactory
 import me.pitok.navigation.observeNavigation
+import me.pitok.options.entities.NotifsCount
+import me.pitok.options.entities.UIMode
 import me.pitok.settings.R
 import me.pitok.settings.di.builder.SettingsComponentBuilder
-import me.pitok.settings.entity.NotifsCount
-import me.pitok.settings.entity.UIMode
 import me.pitok.settings.viewmodels.SettingsViewModel
 import javax.inject.Inject
 
@@ -55,6 +55,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         settingsViewModel.navigationObservable.observeNavigation(this@SettingsFragment)
         settingsBackIc.setOnClickListener(settingsViewModel::onBackClick)
         settingsDarkModeClick.setOnClickListener{
+            settingsDarkModeSw.isChecked = settingsDarkModeSw.isChecked.not()
             settingsViewModel.onDarkModeClick(settingsDarkModeSw.isChecked)
         }
         settingsNotifsCountSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{

@@ -1,9 +1,6 @@
 package me.pitok.login.state
 
 import me.pitok.login.entity.LoginViewMode
-import me.pitok.login.viewmodels.LoginViewModel.Companion.CONFIRM_PASSWORD_FIELD_SWITCH
-import me.pitok.login.viewmodels.LoginViewModel.Companion.PASSWORD_FIELD_SWITCH
-import me.pitok.login.viewmodels.LoginViewModel.Companion.USERNAME_FIELD_SWITCH
 import me.pitok.sdkextentions.CircuitBoolean
 
 
@@ -25,4 +22,10 @@ data class LoginViewState(
     val lastUsername: String = "",
     val lastPassword: String = "",
     val lastConfirmPassword: String = ""
-)
+){
+    companion object{
+        const val USERNAME_FIELD_SWITCH = "username_field_switch"
+        const val PASSWORD_FIELD_SWITCH = "password_field_switch"
+        const val CONFIRM_PASSWORD_FIELD_SWITCH = "confirm_password_field_switch"
+    }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style
+        name="AppBottomSheetDialogTheme.Base"
+        parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+
+        <item name="bottomSheetStyle">@style/AppBottomSheet</item>
+
+    </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="AppBottomSheetDialogTheme.Base"/>
+
+    <style name="AppBottomSheet">
+        <item name="android:background">@drawable/shape_bottom_sheet_dialog_background</item>
+    </style>
+
+</resources>

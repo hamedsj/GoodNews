@@ -8,15 +8,20 @@ class NeewListController(
     private val onReportClick: (Int)->Unit) :
     EpoxyController() {
 
-    var items: MutableList<NeewEntity> = mutableListOf()
+    lateinit var items: List<NeewEntity>
 
     override fun buildModels() {
-        items.forEach {item ->
+        val ids = mutableListOf<Int>()
+        items.forEach startOfForeach@{ item ->
+            if (ids.contains(item._id)) return@startOfForeach
             NeewListModel_()
+                .id(item._id)
                 .neewEntity(item)
                 .onReportClick(View.OnClickListener {
                     onReportClick.invoke(items.indexOf(item))
                 })
+                .addTo(this)
+            ids.add(item._id)
         }
     }
 }

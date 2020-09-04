@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="send_report_dialog_title">آیا می‌خواهید گزارشی برای این خبر ارسال کنید؟</string>
+    <string name="new_neew">خبر جدید</string>
+    <string name="good_news">خوش‌خبر</string>
 </resources>

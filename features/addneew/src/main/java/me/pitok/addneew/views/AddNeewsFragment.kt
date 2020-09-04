@@ -40,7 +40,7 @@ class AddNeewsFragment : Fragment(R.layout.fragment_add_neews) {
 
     private val addNeewsViewModel: AddNeewsViewModel by viewModels{ viewModelFactory }
 
-    private var lastViewState: AddNeewsViewState? = null
+    private var lastViewState: AddNeewsViewState = AddNeewsViewState()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -63,13 +63,13 @@ class AddNeewsFragment : Fragment(R.layout.fragment_add_neews) {
             onViewStateChangedObservable.observe(viewLifecycleOwner,::updateState)
             showMessageLiveData.observe(viewLifecycleOwner,::showMessage)
         }
-
+        addNeewsContentEt.hint = AddNeewsViewModel.ENTER_CONTENT_HINT
     }
 
     private fun updateState(state: AddNeewsViewState){
         addNeewsSendBt.isEnabled = state.isSendButtonEnabled
-        lastViewState?.apply {
-            if(state.addNeewType::class != addNeewType::class){
+        lastViewState.apply {
+            if((state.addNeewType === addNeewType).not()){
                 YoYo.with(Techniques.Shake)
                     .duration(FLOATING_BUTTON_ANIM_DURATION)
                     .repeat(1)
@@ -77,16 +77,25 @@ class AddNeewsFragment : Fragment(R.layout.fragment_add_neews) {
                         lifecycleScope.launch {
                             delay(FLOATING_BUTTON_ANIM_DURATION/2)
                             withContext(dispatcher.main){
-                                addNeewsTypeFb.setImageResource(when(state.addNeewType){
-                                    is NeewAddType.ByLink -> R.drawable.ic_twitter
-                                    is NeewAddType.ByContent -> R.drawable.ic_text
-                                })
+                                when(state.addNeewType){
+                                    is NeewAddType.ByLink -> {
+                                        addNeewsTypeFb.setImageResource(R.drawable.ic_twitter)
+                                        addNeewsContentEt.setText(state.lastLinkEntered)
+                                        addNeewsContentEt.hint = AddNeewsViewModel.ENTER_LINK_HINT
+                                    }
+                                    is NeewAddType.ByContent -> {
+                                        addNeewsTypeFb.setImageResource(R.drawable.ic_text)
+                                        addNeewsContentEt.setText(state.lastContentEntered)
+                                        addNeewsContentEt.hint = AddNeewsViewModel.ENTER_CONTENT_HINT
+                                    }
+                                }
                             }
                         }
                     }
                     .playOn(addNeewsTypeFb)
             }
         }
+        lastViewState = state
     }
 
     private fun showMessage(message:String){

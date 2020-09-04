@@ -6,6 +6,8 @@ apply plugin: 'kotlin-kapt'
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "androidx.constraintlayout:constraintlayout:$library.constraintlayout"
+    implementation "androidx.navigation:navigation-fragment-ktx:$library.navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$library.navigation"
     implementation "com.google.android.material:material:$library.material"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$library.kotlin"
     implementation "androidx.fragment:fragment-ktx:$library.fragment"
@@ -22,6 +24,7 @@ dependencies {
     implementation project(":libraries:coroutines")
     implementation project(":libraries:navigation")
     implementation project(":libraries:lifecycle")
+    implementation project(":shared:options")
     implementation project(":shared:design")
 
 }
